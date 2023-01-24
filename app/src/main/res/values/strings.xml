@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">돈모으기!</string>
+    <string name="goalMoney">목표 금액!</string>
+    <string name="nowMoney">현재 저금액!</string>
+    <string name="zero">0</string>
+    <string name="won">원</string>
+    <string name="percent">%</string>
+    <string name="goalSet">목표 금액 설정하기</string>
+    <string name="moneySet">저축 금액 등록하기</string>
+    <string name="statisticSee">통계 보기</string>
+    <string name="nowGoalSet">현재 목표 금액 :</string>
+    <string name="register">등록</string>
+    <string name="cancel">닫기</string>
+    <string name="goalHint">금액을 입력해주세요.</string>
+    <string name="goalText01">목표 금액 :</string>
+    <string name="nowText01">현재 저금액 :</string>
+    <string name="nowText02">저금액 :</string>
+    <string name="registerText01">등록 금액 :</string>
+    <string name="registerText02">저금액 등록하기</string>
+    <string name="bego01">아직 등록된 저축이 없습니다.</string>
+    <string name="registerDayText01">등록날짜 :</string>
+    <string name="dayChange">날짜 변경</string>
+    <string name="endBtn">마감</string>
+    <string name="delete">삭제</string>
+    <string name="memoText01">메모 :</string>
+    <string name="roundText01">회차 :</string>
+    <string name="dateText01">월 :</string>
+    <string name="bankText01">은행 : </string>
+    <string name="search">조회</string>
+    <string name="bego02">조회 버튼을 눌러 내역을 조회해주세요.</string>
+</resources>
