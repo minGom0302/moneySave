@@ -74,13 +74,50 @@ public class Activity_Statistic extends AppCompatActivity {
 
     @SuppressLint("Recycle")
     private void setLayout() {
+        /************************ 회차 설정 **********************/
+        List<DTO_zip> roundList = new ArrayList<>();
+
+        String sql2 = "select * from verInfo;";
+        Cursor c2 = db_r.rawQuery(sql2, null);
+
+        while(c2.moveToNext()) {
+            String dataRound = c2.getString(0);
+
+            DTO_zip zip = new DTO_zip(dataRound);
+            roundList.add(zip);
+        }
+
+        roundAdapter = new RoundAdapter(Activity_Statistic.this, roundList, 0);
+        roundSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                roundSelectedDTO = roundList.get(position);
+                setSpinner(roundSelectedDTO.getRound());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        roundSpinner.setDropDownVerticalOffset(85);
+        roundSpinner.setAdapter(roundAdapter);
+        // 가장 최근에 등록된 ver으로 셋팅
+        roundSpinner.setSelection(c2.getCount()-1, false);
+    }
+
+    @SuppressLint("Recycle")
+    private void setSpinner(String round) {
+        round = round.substring(0, 1);
+
         /************************** 은행 설정 ************************/
-        String sql1 = "select * from bankCodeInfo where ver = " + mVer + " group by bankCode order by bankCode;";
+        // String sql1 = "select * from bankCodeInfo where ver = " + mVer + " group by bankCode order by bankCode;";
+        String sql1 = "select * from bankCodeInfo where ver = " + round + " group by bankCode order by bankCode;";
         Cursor c1 = db_r.rawQuery(sql1, null);
 
         List<DTO_zip> bankList = new ArrayList<>();
 
-        DTO_zip z = new DTO_zip(mVer, "00", "전체");
+        DTO_zip z = new DTO_zip(round, "00", "전체");
         bankList.add(z);
         while(c1.moveToNext()) {
             String dataVer = c1.getString(0);
@@ -106,41 +143,14 @@ public class Activity_Statistic extends AppCompatActivity {
         bankSpinner.setDropDownVerticalOffset(85);
         bankSpinner.setAdapter(bankAdapter);
 
-        /************************ 회차 설정 **********************/
-        List<DTO_zip> roundList = new ArrayList<>();
-
-        String sql2 = "select * from verInfo;";
-        Cursor c2 = db_r.rawQuery(sql2, null);
-
-        while(c2.moveToNext()) {
-            String dataRound = c2.getString(0);
-
-            DTO_zip zip = new DTO_zip(dataRound);
-            roundList.add(zip);
-        }
-
-        roundAdapter = new RoundAdapter(Activity_Statistic.this, roundList, 0);
-        roundSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                roundSelectedDTO = roundList.get(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        roundSpinner.setDropDownVerticalOffset(85);
-        roundSpinner.setAdapter(roundAdapter);
-
         /************************ 월 설정 **********************/
         List<DTO_zip> dateList = new ArrayList<>();
 
-        String sql3 = "select * from dateInfo where ver = " + mVer + " group by date order by date;";
+        // String sql3 = "select * from dateInfo where ver = " + mVer + " group by date order by date;";
+        String sql3 = "select * from dateInfo where ver = " + round + " group by date order by date;";
         Cursor c3 = db_r.rawQuery(sql3, null);
 
-        DTO_zip zipETC = new DTO_zip(mVer, "전체");
+        DTO_zip zipETC = new DTO_zip(round, "전체");
         dateList.add(zipETC);
         while(c3.moveToNext()) {
             String dataVer = c3.getString(0);
