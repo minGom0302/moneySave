@@ -95,7 +95,6 @@ public class Popup_Goal extends Activity {
             // 내부 저장소 작업
             String s1 = goalMoneyEt.getText().toString();
             String s2 = s1.replaceAll(",", "");
-            boolean goalBoolean = sp.getBoolean("goalBoolean", true);
 
             sp_e.putString("goalMoney", s2);
             sp_e.commit();
